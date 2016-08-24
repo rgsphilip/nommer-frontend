@@ -1,0 +1,31 @@
+.recipeCard {
+    color: #556B2F;
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-bottom: -5px;
+    font-family: 'Galada', cursive;
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+.recipeCardFooter {
+    color: #85144b;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8em;
+    font-weight: 400;
+    margin-top: 0px;
+    padding-top: -5px;
+}
+
+.recipeTag {
+    display: inline-block;
+    color: #85144b;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    padding-top: -5px;
+    padding-right: 5px;
+}
+
+/*font-family: 'Shrikhand', cursive;
+font-family: 'Galada', cursive;*/

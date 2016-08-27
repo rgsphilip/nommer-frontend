@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RecipeTag from './RecipeTag';
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
 import './RecipeCard.css';
 
 // var recipeTags = [];
@@ -9,15 +10,15 @@ import './RecipeCard.css';
 // });
 
 class RecipeCardFooter extends Component {
+  
+
   render() {
     return (
       <div className="recipeCardFooter">
         <div>
           <a href={this.props.link} target="_blank">{this.props.link}</a>
         </div>
-        {
-          this.props.tags.map(tagLabel => <RecipeTag key={tagLabel} label={tagLabel} />)
-        }
+          <TagsInput value={this.props.tags} onChange={this.props.handleChangeTags}/>
       </div>
     );
   }

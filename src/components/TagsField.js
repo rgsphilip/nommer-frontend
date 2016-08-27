@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-
+import { Button } from 'react-bootstrap';
+import './Tags.css';
 
 class TagsField extends Component {
+  
   render() {
     return (
-      <div>
-        //all the tags that belong to the user
-        
+      <div className="tagsField">
+        <Button type="submit" onClick={this.getTextFields}>
+          {this.props.tagName}
+        </Button>
       </div>
     );
   }

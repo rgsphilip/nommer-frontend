@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Form, FormGroup, FormControl, Button, ControlLabel} from 'react-bootstrap';
-
+import TagsInput from 'react-tagsinput'
+import {Form, FormGroup, ControlLabel } from 'react-bootstrap';
+var hello = ["hello"];
 class TagsSearchBar extends Component {
   render() {
     return (
@@ -8,13 +9,11 @@ class TagsSearchBar extends Component {
         <FormGroup controlId="formInlineName">
           <ControlLabel>Search for recipe by tag: </ControlLabel>
           {' '}
-          <FormControl type="text" placeholder="Tags" />
+          
         </FormGroup>
+        <TagsInput value={hello} onChange={hello}/>
         {' '}
         {' '}
-        <Button type="submit">
-          Search
-        </Button>
       </Form>
     );
   }

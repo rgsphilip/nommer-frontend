@@ -1,11 +1,14 @@
 .recipeCard {
     color: #556B2F;
     padding: 10px;
-    padding-bottom: 0px;
-    margin-bottom: -5px;
+    margin: 8px;
     font-family: 'Galada', cursive;
     font-size: 1.3em;
     font-weight: 400;
+    border-color: lightgrey;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fafafa;
 }
 
 .recipeCardFooter {

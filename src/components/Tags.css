@@ -3,3 +3,13 @@
   padding: 1px 3px 1px 3px;
   margin: 2px;
 }
+
+.title {
+  font-family: 'Galada', cursive;
+  font-size: 1.3em;
+}
+
+.searchBar {
+  padding: 20px;
+  
+}

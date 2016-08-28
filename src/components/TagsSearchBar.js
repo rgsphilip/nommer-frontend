@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import TagsInput from 'react-tagsinput'
 import {Form, FormGroup, ControlLabel } from 'react-bootstrap';
-var hello = ["hello"];
+import './Tags.css';
+
 class TagsSearchBar extends Component {
   render() {
     return (
-      <Form inline>
+      <Form inline className="searchBar title">
         <FormGroup controlId="formInlineName">
           <ControlLabel>Search for recipe by tag: </ControlLabel>
           {' '}
           
         </FormGroup>
-        <TagsInput value={hello} onChange={hello}/>
+        <TagsInput value={this.props.tags} onChange={this.props.handleSearchTags}/>
         {' '}
         {' '}
       </Form>

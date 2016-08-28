@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 import TagsSearchBar from './TagsSearchBar';
-import TagsSearchResults from './TagsSearchResults';
 import TagsField from './TagsField';
+import RecipeCard from './RecipeCard';
+import './Tags.css';
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  } else {
+    const error = new Error(`HTTP Error ${response.statusText}`);
+    error.status = response.statusText;
+    error.response = response;
+    console.log(error); // eslint-disable-line no-console
+    throw error;
+  }
+}
 
 class TagsView extends Component {
 
@@ -10,8 +23,12 @@ class TagsView extends Component {
 		super(props);
 		this.state = {
 			loading : true,
-			response : []
+      tags : [],
+			recipes : [],
+      response : []
 		}
+    this.handleSearchTags = this.handleSearchTags.bind(this);
+    this.clickSearchTag = this.clickSearchTag.bind(this);
 	}
 	
 	componentWillMount() {
@@ -34,24 +51,58 @@ class TagsView extends Component {
 			});
 	}
 
+  handleSearchTags(tags) {
+    const body = {
+      tags : tags
+    };
+    return fetch(`http://localhost:3001/searchbytag`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+      })
+      .then(checkStatus)
+      .then(function(response){
+        return response.json();
+      })
+      .then((recipes) => {
+        this.setState({
+          tags : tags,
+          recipes : recipes
+        })
+      });
+  }
+
+  clickSearchTag(tag) {
+    this.handleSearchTags(this.state.tags.concat(tag));
+  }
+
   render() {
     let tagNames = this.state.response.map( tag => {
-			return <TagsField key={tag.id} tagName={tag.tagName} id={tag.id}/>
+			return <TagsField key={tag.id} tagName={tag.tagName} id={tag.id} onClick={this.clickSearchTag}/>
+		})
+    let recipeNames = this.state.recipes.map( recipe => {
+			return <RecipeCard key={recipe.id} title={recipe.recipeName} link={recipe.recipeLink} tags={recipe.tags} id={recipe.id}/>
 		})
     return (
       <div>
-        <TagsSearchBar />
+
+        <TagsSearchBar tags={this.state.tags} handleSearchTags={this.handleSearchTags}/>
 
         <Grid>
           <Row className="show-grid">
             <Col sm={16} md={8}>
-              <TagsSearchResults />
+              <span className="title">Your tagged recipes:</span>
+              <br />
+              {recipeNames}
+
             </Col>
             
             <Clearfix visibleSmBlock><code>&lt;{'Clearfix visibleSmBlock'} /&gt;</code></Clearfix>
 
             <Col sm={8} md={4}>
-              Your tags:
+              <span className="title">Your tags:</span>
               <br />
               {tagNames}
             </Col>

@@ -8,7 +8,7 @@ class LoginGreeting extends Component {
       <Jumbotron className="login">
         <div className="container">
           <h1>Welcome to Nommer</h1>
-          <p className="info">Nommer is a tool to save recipes, schedules meals throughout the week, and manage grocery lists. Log in to get started.</p>
+          <p className="info">Nommer is a tool to save recipes, organize them with tags, and manage grocery lists. Log in to get started.</p>
         </div>
     </Jumbotron>   
     );

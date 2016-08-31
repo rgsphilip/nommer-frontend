@@ -26,7 +26,7 @@ const GroceryListInputModal = React.createClass({
             <Modal.Title>Copy and paste your ingredient list here:</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <GroceryListInputForm />
+            <GroceryListInputForm postNewGroceries={this.props.postNewGroceries}/>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Close</Button>

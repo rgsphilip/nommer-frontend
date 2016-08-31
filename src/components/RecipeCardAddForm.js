@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
+import {postAuth} from '../utils/api-helper';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -8,7 +9,7 @@ function checkStatus(response) {
     const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
-    console.log(error); // eslint-disable-line no-console
+    console.log(error); 
     throw error;
   }
 }
@@ -35,15 +36,9 @@ class RecipeCardAddForm extends Component {
           'tags' : this.state.tags
       };
       console.log(request);
-      return fetch(`http://localhost:3001/postrecipe`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(request)
-      }).then(checkStatus)
+      return postAuth(`http://localhost:3001/postrecipe`, request)
+        .then(checkStatus)
         .then(parseJSON);
-
   }
 
   handleChangeLink(event) {

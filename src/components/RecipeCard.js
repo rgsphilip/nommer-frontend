@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {postAuth} from '../utils/api-helper';
 import RecipeCardFooter from './RecipeCardFooter';
 import './RecipeCard.css';
 
@@ -9,7 +10,7 @@ function checkStatus(response) {
     const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
-    console.log(error); // eslint-disable-line no-console
+    console.log(error); 
     throw error;
   }
 }
@@ -28,13 +29,7 @@ class RecipeCard extends Component {
       tag : changed[0],
       recipeId : this.props.id
     };
-    return fetch(`http://localhost:3001/addtag`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body)
-      })
+    return postAuth(`http://localhost:3001/addtag`, body)
       .then(checkStatus)
       .then(() => {
         this.setState({

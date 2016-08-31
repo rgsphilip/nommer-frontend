@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
 import RecipeCard from './RecipeCard';
 import RecipeCardAdd from './RecipeCardAdd';
+import {getAuth} from '../utils/api-helper';
 import './RecipeCard.css';
 
 class RecipeBook extends Component {
@@ -13,14 +15,11 @@ class RecipeBook extends Component {
 	}
 	
 	componentWillMount() {
-		fetch(`http://localhost:3001/recipes`, {
-			method: "GET",
-			headers: {
-				"Accept": "application/json"
-			}
-		}).then(function(response) {
+		getAuth(`http://localhost:3001/recipes`)
+			.then(function(response) {
 				return response.json()
-			}).then(json => {
+			})
+			.then(json => {
 				console.log('parsed json', json)
 				this.setState({
 					response : json,
@@ -28,7 +27,7 @@ class RecipeBook extends Component {
 				})
 			})
 			.catch(function(ex) {
-				console.log('parsing failed', ex)
+				hashHistory.push('/login');
 			});
 	}
 
@@ -38,6 +37,7 @@ class RecipeBook extends Component {
 		})
 		return (
 			<div>
+				<div className="title">Your Recipes</div>
 				{
 					this.state.loading ? 
 						<span>Loading...</span>

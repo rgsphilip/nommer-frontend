@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
+import { hashHistory } from 'react-router';
+import {getAuth, postAuth} from '../utils/api-helper';
 import TagsSearchBar from './TagsSearchBar';
 import TagsField from './TagsField';
 import RecipeCard from './RecipeCard';
@@ -12,7 +14,7 @@ function checkStatus(response) {
     const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
-    console.log(error); // eslint-disable-line no-console
+    console.log(error); 
     throw error;
   }
 }
@@ -32,36 +34,27 @@ class TagsView extends Component {
 	}
 	
 	componentWillMount() {
-		fetch(`http://localhost:3001/alltags`, {
-			method: "GET",
-			headers: {
-				"Accept": "application/json"
-			}
-		}).then(function(response) {
-				return response.json()
-			}).then(json => {
-				console.log('parsed json', json)
-				this.setState({
-					response : json,
-					loading : false
-				})
-			})
-			.catch(function(ex) {
-				console.log('parsing failed', ex)
-			});
+		getAuth(`http://localhost:3001/alltags`)
+    .then(function(response) {
+      return response.json()
+    })
+    .then(json => {
+      console.log('parsed json', json)
+      this.setState({
+        response : json,
+        loading : false
+      })
+    })
+    .catch(function(ex) {
+				hashHistory.push('/login');
+		});
 	}
 
   handleSearchTags(tags) {
     const body = {
       tags : tags
     };
-    return fetch(`http://localhost:3001/searchbytag`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body)
-      })
+    return postAuth(`http://localhost:3001/searchbytag`, body)
       .then(checkStatus)
       .then(function(response){
         return response.json();
@@ -99,7 +92,7 @@ class TagsView extends Component {
 
             </Col>
             
-            <Clearfix visibleSmBlock><code>&lt;{'Clearfix visibleSmBlock'} /&gt;</code></Clearfix>
+            <Clearfix visibleSmBlock></Clearfix>
 
             <Col sm={8} md={4}>
               <span className="title">Your tags:</span>

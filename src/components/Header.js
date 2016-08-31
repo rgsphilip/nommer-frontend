@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import './Header.css';
+import AuthActions from '../actions/AuthActions';
+import AuthStore from '../stores/AuthStore';
 
+class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      authenticated: AuthStore.isAuthenticated()
+    }
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+  
+  login() {
+    this.props.lock.show((err, profile, token) => {
+      if (err) {
+        alert(err);
+        return;
+      }
+      AuthActions.logUserIn(profile, token);
+      this.setState({
+        authenticated : true
+      });
+    });
+  }
 
-class LoginPanel extends Component {
+  logout() {
+    AuthActions.logUserOut();
+    this.setState({
+      authenticated : false
+    });
+  }
   render() {
     return (
       <Navbar className="navbar-default">
@@ -18,11 +47,15 @@ class LoginPanel extends Component {
           <Nav>
             <NavItem eventKey={1} href="/#/">Recipe Cards</NavItem>
             <NavItem eventKey={2} href="/#/tags">Filter by Tag</NavItem>
-            <NavItem eventKey={3} href="#">Build Grocery List</NavItem>
-            <NavItem eventKey={4} href="#">Calendar</NavItem>
+            <NavItem eventKey={3} href="/#/grocery">Build Grocery List</NavItem>
+            {/*<NavItem eventKey={4} href="#">Calendar</NavItem>*/}
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="http://localhost:3001/logout">Log Out</NavItem>
+            { !this.state.authenticated ? (
+              <NavItem eventKey={1} onClick={this.login}>Log In</NavItem>
+            ) : (
+              <NavItem eventKey={2} onClick={this.logout}>Log Out</NavItem>
+            )}
           </Nav>
         </Navbar.Collapse>
 
@@ -31,7 +64,7 @@ class LoginPanel extends Component {
   }
 }
 
-export default LoginPanel;
+export default Header;
 
 
 // <div className="header">

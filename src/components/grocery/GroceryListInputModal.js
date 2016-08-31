@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import RecipeCardAddForm from './RecipeCardAddForm';
-
-const RecipeCardAdd = React.createClass({
+import GroceryListInputForm from './GroceryListInputForm';
+const GroceryListInputModal = React.createClass({
   getInitialState() {
     return { showModal: false };
   },
@@ -19,15 +18,15 @@ const RecipeCardAdd = React.createClass({
     return (
       <div>
         <Button bsStyle="default" onClick={this.open}>
-          Add to your grocery List
+          Add to your grocery list
         </Button>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Add items to your grocery list:</Modal.Title>
+            <Modal.Title>Copy and paste your ingredient list here:</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <RecipeCardAddForm />
+            <GroceryListInputForm />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Close</Button>

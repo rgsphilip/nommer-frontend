@@ -3,6 +3,8 @@ import {Button, Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bo
 import {postAuth} from '../utils/api-helper';
 
 function checkStatus(response) {
+  //Function found at fetch github: https://github.com/github/fetch 
+  //ensures that an OK status code comes back
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {

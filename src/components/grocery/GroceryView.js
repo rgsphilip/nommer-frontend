@@ -27,7 +27,9 @@ class GroceryView extends Component {
   constructor(props) {
 		super(props);
 
+    this.handleGroceryClick = this.handleGroceryClick.bind(this);
     this.postNewGroceries = this.postNewGroceries.bind(this);
+    this.deleteOldGroceries = this.deleteOldGroceries.bind(this);
 		this.state = {
 			loading : true,
 			groceries : []
@@ -52,19 +54,49 @@ class GroceryView extends Component {
 	}
 
   postNewGroceries(newGroceries) {
-      console.log("clicked");
-      var request =  {
-          'groceries' : newGroceries
-      };
-      console.log(request);
-      return postAuth(`http://localhost:3001/postgroceries`, request)
-        .then(checkStatus)
-        .then(parseJSON)
-        .then(json => {
-          this.setState({
-            groceries: json,
-          });
+    console.log("clicked");
+    var request =  {
+        'groceries' : newGroceries
+    };
+    console.log(request);
+    return postAuth(`http://localhost:3001/postgroceries`, request)
+      .then(checkStatus)
+      .then(parseJSON)
+      .then(json => {
+        this.setState({
+          groceries: json,
         });
+    });
+  }
+
+  handleGroceryClick(groceryId) {
+    this.setState({ 
+      groceries: this.state.groceries.map( grocery => {
+        if (grocery.id === groceryId) {
+          grocery.checked = !grocery.checked;
+        }
+        return grocery;
+      })
+    });
+    console.log(this.state.groceries);
+  }
+
+  deleteOldGroceries(oldGroceries) {
+    console.log("clicked");
+    var request = {
+      'groceries' : this.state.groceries.filter(grocery => {
+        return grocery.checked;
+      })
+    };
+    console.log(request);
+    return postAuth(`http://localhost:3001/deletegroceries`, request)
+    .then(checkStatus)
+      .then(parseJSON)
+      .then(json => {
+        this.setState({
+          groceries: json,
+        });
+    });
   }
 
   render() {
@@ -72,8 +104,8 @@ class GroceryView extends Component {
     return (
       <div>
         <GroceryListInputModal postNewGroceries={this.postNewGroceries}/>
-        <GroceryListOutput loading={this.state.loading} groceries={this.state.groceries}/>
-        <Button>Got it!</Button>
+        <GroceryListOutput loading={this.state.loading} groceries={this.state.groceries} handleGroceryClick={this.handleGroceryClick}/>
+        <Button onClick={this.deleteOldGroceries}>Got it!</Button>
       </div>
     );
   }

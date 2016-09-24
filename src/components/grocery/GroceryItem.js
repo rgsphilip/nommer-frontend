@@ -6,13 +6,15 @@ class GroceryItem extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
 
+  handleClick() {
+    this.props.handleGroceryClick(this.props.id);
   }
+
   render() {
     return (
       <div className="groceryItem">     
-        <Checkbox>
+        <Checkbox onChange={this.handleClick}>
           {this.props.groceryName}
         </Checkbox>
       </div>

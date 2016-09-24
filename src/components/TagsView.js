@@ -8,6 +8,8 @@ import RecipeCard from './RecipeCard';
 import './Tags.css';
 
 function checkStatus(response) {
+  //Function found at fetch github: https://github.com/github/fetch 
+  //ensures that an OK status code comes back
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {

@@ -1,3 +1,5 @@
+//Utilized https://scotch.io/tutorials/build-a-react-flux-app-with-user-authentication to implement authentication, including this file.
+
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AuthConstants from '../constants/AuthConstants';
 import { EventEmitter } from 'events';

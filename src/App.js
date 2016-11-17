@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header';
+import Header from './components/header/Header';
+import {auth0pass, auth0name } from './secret';
 
 class App extends Component {
 
   componentWillMount() {
-    this.lock = new Auth0Lock('TL6WvwO2DMfOKAUgK4WuWWzbkN57qVyk', 'rgsphilipstudent.auth0.com'); //client id, auth0domain
+    this.lock = new Auth0Lock(auth0pass, auth0name); //client id, auth0domain
   }
   render() {
     return (

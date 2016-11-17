@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 import RecipeCard from './RecipeCard';
 import RecipeCardAdd from './RecipeCardAdd';
-import {getAuth} from '../utils/api-helper';
+import {getAuth} from '../../utils/api-helper';
 import './RecipeCard.css';
 
 class RecipeBook extends Component {

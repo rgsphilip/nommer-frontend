@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import { hashHistory } from 'react-router';
 import './Header.css';
-import AuthActions from '../actions/AuthActions';
-import AuthStore from '../stores/AuthStore';
+import AuthActions from '../../actions/AuthActions';
+import AuthStore from '../../stores/AuthStore';
 
 class Header extends Component {
   constructor() {

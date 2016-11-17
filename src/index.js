@@ -3,9 +3,9 @@ import 'core-js/fn/object/assign'; //do I need this?
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import App from './App';
-import LoginGreeting from './components/LoginGreeting';
-import RecipeBook from './components/RecipeBook';
-import TagsView from './components/TagsView';
+import LoginGreeting from './components/login/LoginGreeting';
+import RecipeBook from './components/recipe/RecipeBook';
+import TagsView from './components/tags/TagsView';
 import GroceryView from './components/grocery/GroceryView';
 import './index.css';
 

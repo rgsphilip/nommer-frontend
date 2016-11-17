@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Clearfix } from 'react-bootstrap';
 import { hashHistory } from 'react-router';
-import {getAuth, postAuth} from '../utils/api-helper';
+import {getAuth, postAuth} from '../../utils/api-helper';
 import TagsSearchBar from './TagsSearchBar';
 import TagsField from './TagsField';
-import RecipeCard from './RecipeCard';
+import RecipeCard from '../recipe/RecipeCard';
 import './Tags.css';
 
 function checkStatus(response) {

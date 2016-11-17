@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
-import {postAuth} from '../utils/api-helper';
+import {postAuth} from '../../utils/api-helper';
 
 function checkStatus(response) {
   //Function found at fetch github: https://github.com/github/fetch 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {postAuth} from '../utils/api-helper';
+import {postAuth} from '../../utils/api-helper';
 import RecipeCardFooter from './RecipeCardFooter';
 import './RecipeCard.css';
 
